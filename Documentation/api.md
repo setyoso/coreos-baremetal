@@ -11,7 +11,7 @@ Serves a static iPXE boot script which gathers client machine attributes and cha
 **Response**
 
     #!ipxe
-    chain ipxe?uuid=${uuid}&mac=${net0/mac:hexhyp}&domain=${domain}&hostname=${hostname}&serial=${serial}
+    chain ipxe?uuid=${uuid}&mac=${mac:hexhyp}&domain=${domain}&hostname=${hostname}&serial=${serial}
 
 Client's booted with the `/ipxe.boot` endpoint will introspect and make a request to `/ipxe` with the `uuid`, `mac`, `hostname`, and `serial` value as query arguments.
 
@@ -32,7 +32,7 @@ Finds the profile for the machine and renders the network boot config (kernel, o
 **Response**
 
     #!ipxe
-    kernel /assets/coreos/1185.3.0/coreos_production_pxe.vmlinuz coreos.config.url=http://matchbox.foo:8080/ignition?uuid=${uuid}&mac=${net0/mac:hexhyp} coreos.first_boot=1 coreos.autologin
+    kernel /assets/coreos/1185.3.0/coreos_production_pxe.vmlinuz coreos.config.url=http://matchbox.foo:8080/ignition?uuid=${uuid}&mac=${mac:hexhyp} coreos.first_boot=1 coreos.autologin
     initrd  /assets/coreos/1185.3.0/coreos_production_pxe_image.cpio.gz
     boot
 
@@ -169,7 +169,7 @@ OpenPGPG signature endpoints serve detached binary and ASCII armored signatures 
 | Endpoint   | Signature Endpoint | ASCII Signature Endpoint |
 |------------|--------------------|-------------------------|
 | iPXE       | `http://matchbox.foo/ipxe.sig` | `http://matchbox.foo/ipxe.asc` |
-| GRUB2      | `http://bootcf.foo/grub.sig` | `http://matchbox.foo/grub.asc` |
+| GRUB2      | `http://matchbox.foo/grub.sig` | `http://matchbox.foo/grub.asc` |
 | Ignition   | `http://matchbox.foo/ignition.sig` | `http://matchbox.foo/ignition.asc` |
 | Cloud-Config | `http://matchbox.foo/cloud.sig` | `http://matchbox.foo/cloud.asc` |
 | Generic    | `http://matchbox.foo/generic.sig` | `http://matchbox.foo/generic.asc` |
